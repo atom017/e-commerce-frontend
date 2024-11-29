@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { FaBars, FaTimes, FaHome, FaShoppingCart, FaRegUser, FaSignOutAlt } from 'react-icons/fa'; // Icons
-import { logout, setUser } from '../redux/userSlice'; // Redux action to logout and setUser
-import { fetchUserFromLocalStorage } from '../utils/auth'; // A utility function to fetch user from localStorage
+import { FaBars, FaTimes, FaHome, FaShoppingCart, FaRegUser, FaSignOutAlt, FaHeart } from 'react-icons/fa'; // Icons
+import { logout, setUser } from '../redux/userSlice'; // Redux actions
+import { fetchUserFromLocalStorage } from '../utils/auth'; // Fetch user from localStorage
 
 const Navbar = () => {
-  const user = useSelector((state) => state.user.user); // Get the user data from Redux state
-  const cartItems = useSelector((state) => state.cart.items); // Get cart items from Redux state
+  const user = useSelector((state) => state.user.user); // Get user data from Redux
+  const cartItems = useSelector((state) => state.cart.items); // Get cart items from Redux
+  const favoriteItems = useSelector((state) => state.favorites.items); // Get favorite items from Redux
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,6 +39,9 @@ const Navbar = () => {
   // Calculate total number of items in the cart (sum of quantities)
   const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 
+  // Calculate total number of favorite items
+  const totalFavorites = favoriteItems.length;
+
   return (
     <nav className="bg-blue-600 p-4 shadow-lg">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -56,6 +60,10 @@ const Navbar = () => {
             <FaShoppingCart className="mr-1" />
             Cart ({totalItems}) {/* Display total items */}
           </Link>
+          <Link to="/favorites" className="text-white hover:text-gray-200 flex items-center">
+            <FaHeart className="mr-1" />
+            Favorites ({totalFavorites}) {/* Display total favorite items */}
+          </Link>
 
           {/* Conditional Render: Show login/register if not logged in, else show user profile and logout */}
           {!user ? (
@@ -72,12 +80,6 @@ const Navbar = () => {
           ) : (
             <>
               <div className="text-white flex items-center">
-                {/* <span className="mr-2">Welcome, {user.name || user.email}</span> */}
-                {/* <Link to="/profile" className="hover:text-gray-200 flex items-center">
-                  <FaRegUser className="mr-1" />
-                  Profile
-                </Link> */}
-                {/* Add Profile Edit Link */}
                 <Link to="/profile/edit" className="ml-4 text-white hover:text-gray-200 flex items-center">
                   <FaRegUser className="mr-1" />
                   {user.name || user.email}
@@ -117,6 +119,10 @@ const Navbar = () => {
           <FaShoppingCart className="mr-1" />
           Cart ({totalItems}) {/* Display total items */}
         </Link>
+        <Link to="/favorites" className="block text-white hover:text-gray-200 py-2 flex items-center">
+          <FaHeart className="mr-1" />
+          Favorites ({totalFavorites}) {/* Display total favorite items */}
+        </Link>
 
         {!user ? (
           <>
@@ -131,12 +137,6 @@ const Navbar = () => {
           </>
         ) : (
           <>
-            {/* <div className="block text-white py-2">Welcome, {user.name || user.email}</div> */}
-            {/* <Link to="/profile" className="block text-white hover:text-gray-200 py-2 flex items-center">
-              <FaRegUser className="mr-1" />
-              Profile
-            </Link> */}
-            {/* Mobile View Edit Profile Link */}
             <Link to="/profile/edit" className="block text-white hover:text-gray-200 py-2 flex items-center">
               <FaRegUser className="mr-1" />
               {user.name || user.email}

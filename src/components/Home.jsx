@@ -1,18 +1,24 @@
+// src/pages/Home.js
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ProductCard from '../components/ProductCard'; // Import ProductCard
+import ProductCard from '../components/ProductCard';
+import PopularProductsCarousel from '../components/PopularProductsCarousel'; // Import the carousel component
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../redux/cartSlice'; 
+import { addToCart } from '../redux/cartSlice';
+import { addToFavorites } from '../redux/favoritesSlice';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [quantity, setQuantity] = useState(1); // State to manage quantity input
+  const [quantity, setQuantity] = useState(1);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all');
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user); // Assuming user data is stored in Redux
+  const user = useSelector((state) => state.user.user);
   const baseURI = import.meta.env.VITE_API_BASE_URI;
 
-  // Fetch products from the backend
+  // Fetch products and categories from the backend
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -22,31 +28,40 @@ const Home = () => {
         console.error('Error fetching products:', error);
       }
     };
+
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(`${baseURI}/categories`);
+        setCategories(response.data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
     fetchProducts();
+    fetchCategories();
   }, []);
 
-  // Handle Add to Cart (call backend to update/create cart, then update Redux)
-  // Home.js
-const handleAddToCart = async (product) => {
-  const item = {
-    id: product._id,
-    name: product.name,
-    price: product.price,
-    quantity: quantity, // Use the current quantity state
+  // Handle Add to Cart
+  const handleAddToCart = async (product) => {
+    const item = {
+      id: product._id,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+    };
+    dispatch(addToCart(item));
   };
 
-  // Dispatch the addToCart action to update Redux store
-  dispatch(addToCart(item));
+  const handleAddToFavorites = (product) => {
+    dispatch(addToFavorites(product));
+  };
 
-};
-
-  
-
-
-  // Filter products based on search term
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    product.category.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter products by search term and category
+  const filteredProducts = products.filter((product) => 
+    (product.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    product.category.name.toLowerCase().includes(searchTerm.toLowerCase())) &&
+    (selectedCategory === 'all' || product.category.name === selectedCategory)
   );
 
   return (
@@ -54,15 +69,31 @@ const handleAddToCart = async (product) => {
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold text-center mb-8">Products</h1>
 
-        {/* Search Bar */}
-        <div className="mb-6">
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search products by name or category"
-            className="w-full p-3 border rounded-lg"
-          />
+        {/* Search and Category Filters */}
+        <div className="flex justify-between mb-6">
+          <div className="w-full sm:w-1/2">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search products"
+              className="w-full p-3 border rounded-lg"
+            />
+          </div>
+          <div className="w-full sm:w-1/4">
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full p-3 border rounded-lg"
+            >
+              <option value="all">All Categories</option>
+              {categories.map((category) => (
+                <option key={category._id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {/* Product List */}
@@ -70,17 +101,21 @@ const handleAddToCart = async (product) => {
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <ProductCard
-                key={product._id} // Assuming product has a unique '_id' field
+                key={product._id}
                 product={product}
-                onAddToCart={handleAddToCart} // Pass handleAddToCart function to ProductCard
-                setQuantity={setQuantity} // Pass setQuantity function to ProductCard to handle quantity change
-                quantity={quantity} // Pass current quantity to ProductCard
+                onAddToCart={handleAddToCart}
+                onAddToFavorite={handleAddToFavorites}
+                setQuantity={setQuantity}
+                quantity={quantity}
               />
             ))
           ) : (
             <p className="text-center text-gray-600">No products found.</p>
           )}
         </div>
+
+        {/* Popular Products Carousel */}
+        <PopularProductsCarousel />
       </div>
     </div>
   );

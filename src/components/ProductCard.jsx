@@ -2,7 +2,7 @@
 import React from 'react';
 import { FaCartPlus, FaHeart } from 'react-icons/fa'; // Using React Icons
 
-const ProductCard = ({ product, onAddToCart }) => {
+const ProductCard = ({ product, onAddToCart,onAddToFavorite}) => {
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
       {/* Product Image */}
@@ -30,7 +30,8 @@ const ProductCard = ({ product, onAddToCart }) => {
           >
             <FaCartPlus className="mr-2" /> Add to Cart
           </button>
-          <button className="text-red-600 hover:text-red-800 flex items-center">
+          <button onClick={() => onAddToFavorite(product)}
+          className="text-red-600 hover:text-red-800 flex items-center">
             <FaHeart className="mr-2" /> Like
           </button>
         </div>
