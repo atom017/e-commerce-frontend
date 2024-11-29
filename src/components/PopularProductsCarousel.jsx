@@ -1,5 +1,3 @@
-// src/components/PopularProductsCarousel.js
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Slider from 'react-slick'; // Slick carousel component
@@ -29,6 +27,8 @@ const PopularProductsCarousel = () => {
     dots: true,
     infinite: true,
     speed: 500,
+    autoplay: true,  // Enable autoplay
+    autoplaySpeed: 3000, // Set the autoplay speed (3 seconds)
     slidesToShow: 4,
     slidesToScroll: 1,
     responsive: [
@@ -62,7 +62,12 @@ const PopularProductsCarousel = () => {
       {popularProducts.length > 0 ? (
         <Slider {...settings}>
           {popularProducts.map((product) => (
-            <div key={product._id} className="flex flex-col items-center bg-white p-4 rounded-lg shadow-lg">
+            <div key={product._id} className="flex flex-col items-center bg-white p-4 rounded-lg shadow-lg relative">
+              {/* Product "Popular" Tag */}
+              <div className="absolute top-4 left-4 bg-red-600 text-white text-xs font-semibold py-1 px-2 rounded-full">
+                Popular
+              </div>
+              
               {/* Product Image */}
               <div className="w-full h-56 bg-gray-200 flex justify-center items-center overflow-hidden rounded-lg mb-4">
                 <img
