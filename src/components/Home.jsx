@@ -7,6 +7,7 @@ import PopularProductsCarousel from '../components/PopularProductsCarousel'; // 
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
 import { addToFavorites } from '../redux/favoritesSlice';
+import { FaSearch } from 'react-icons/fa'; // Importing FontAwesome Search Icon
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -49,6 +50,7 @@ const Home = () => {
       name: product.name,
       price: product.price,
       quantity: quantity,
+      image: product.image
     };
     dispatch(addToCart(item));
   };
@@ -58,9 +60,9 @@ const Home = () => {
   };
 
   // Filter products by search term and category
-  const filteredProducts = products.filter((product) => 
-    (product.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    product.category.name.toLowerCase().includes(searchTerm.toLowerCase())) &&
+  const filteredProducts = products.filter((product) =>
+    (product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.category.name.toLowerCase().includes(searchTerm.toLowerCase())) &&
     (selectedCategory === 'all' || product.category.name === selectedCategory)
   );
 
@@ -70,15 +72,16 @@ const Home = () => {
         <h1 className="text-3xl font-bold text-center mb-8">Products</h1>
 
         {/* Search and Category Filters */}
-        <div className="flex justify-between mb-6">
-          <div className="w-full sm:w-1/2">
+        <div className="flex flex-col sm:flex-row justify-between mb-6 gap-4">
+          <div className="w-full sm:w-1/2 relative">
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search products"
-              className="w-full p-3 border rounded-lg"
+              className="w-full p-3 pl-10 border rounded-lg"
             />
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
           </div>
           <div className="w-full sm:w-1/4">
             <select

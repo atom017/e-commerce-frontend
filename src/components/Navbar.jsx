@@ -69,11 +69,11 @@ const Navbar = () => {
           {!user ? (
             <>
               <Link to="/login" className="text-white hover:text-gray-200 flex items-center">
-                <FaRegUser className="mr-1" />
+
                 Login
               </Link>
               <Link to="/register" className="text-white hover:text-gray-200 flex items-center">
-                <FaRegUser className="mr-1" />
+
                 Register
               </Link>
             </>
@@ -127,11 +127,11 @@ const Navbar = () => {
         {!user ? (
           <>
             <Link to="/login" className="block text-white hover:text-gray-200 py-2 flex items-center">
-              <FaRegUser className="mr-1" />
+
               Login
             </Link>
             <Link to="/register" className="block text-white hover:text-gray-200 py-2 flex items-center">
-              <FaRegUser className="mr-1" />
+
               Register
             </Link>
           </>
