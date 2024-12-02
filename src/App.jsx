@@ -7,6 +7,8 @@ import Cart from './components/Cart';
 import Login from './components/Login';
 import Register from './components/Register';
 import ProfileEdit from './components/ProfileEdit';
+import SuccessPage from './components/SuccessPage';
+import CancelPage from './components/CancelPage';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile/edit" element={<ProfileEdit />} /> 
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path="/success" element={<CancelPage />} />
       </Routes>
     </Router>
   );
