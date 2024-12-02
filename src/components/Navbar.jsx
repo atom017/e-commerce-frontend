@@ -26,13 +26,14 @@ const Navbar = () => {
   // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    setIsMenuIcon(!isMenuIcon); // Toggle the menu icon between bars and X
+    setIsMenuIcon(!isMenuIcon); 
   };
 
   // Handle Logout
   const handleLogout = () => {
-    dispatch(logout()); // Dispatch the logout action
-    localStorage.removeItem('token'); // Remove token from localStorage
+    dispatch(logout());
+    localStorage.removeItem('token'); 
+    localStorage.removeItem('user'); 
     navigate('/'); // Redirect to home page after logout
   };
 
