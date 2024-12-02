@@ -7,7 +7,9 @@ import PopularProductsCarousel from '../components/PopularProductsCarousel'; // 
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
 import { addToFavorites } from '../redux/favoritesSlice';
-import { FaSearch } from 'react-icons/fa'; // Importing FontAwesome Search Icon
+import { FaSearch } from 'react-icons/fa'; 
+import { ToastContainer,toast } from 'react-toastify'; // Import toast from react-toastify
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -53,6 +55,14 @@ const Home = () => {
       image: product.image
     };
     dispatch(addToCart(item));
+    toast.success(`${product.name} has been added to your cart!`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      pauseOnHover: true,
+    });
   };
 
   const handleAddToFavorites = (product) => {
@@ -119,6 +129,7 @@ const Home = () => {
 
         {/* Popular Products Carousel */}
         <PopularProductsCarousel />
+        <ToastContainer />
       </div>
     </div>
   );
