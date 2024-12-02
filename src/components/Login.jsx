@@ -24,6 +24,7 @@ const Login = () => {
 
       // Store JWT token in localStorage
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
 
       // Set user data in Redux store
       dispatch(setUser({ user: response.data.user, token: response.data.token }));

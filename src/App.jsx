@@ -9,6 +9,7 @@ import Register from './components/Register';
 import ProfileEdit from './components/ProfileEdit';
 import SuccessPage from './components/SuccessPage';
 import CancelPage from './components/CancelPage';
+import FavoritesPage from './components/FavoritesPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/profile/edit" element={<ProfileEdit />} /> 
         <Route path="/success" element={<SuccessPage />} />
         <Route path="/success" element={<CancelPage />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
     </Router>
   );
