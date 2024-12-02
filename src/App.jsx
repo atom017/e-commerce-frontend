@@ -10,6 +10,7 @@ import ProfileEdit from './components/ProfileEdit';
 import SuccessPage from './components/SuccessPage';
 import CancelPage from './components/CancelPage';
 import FavoritesPage from './components/FavoritesPage';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/success" element={<CancelPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
       </Routes>
+      <Footer/>
     </Router>
   );
 }
