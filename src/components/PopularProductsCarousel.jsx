@@ -11,7 +11,7 @@ const PopularProductsCarousel = () => {
       try {
         const response = await axios.get(`${baseURI}/products`);
         // Filter products based on the "POPULAR" tag
-        const popular = response.data.filter((product) =>
+        const popular = response.data.products.filter((product) =>
           product.tags.includes("popular")
         );
         setPopularProducts(popular);
@@ -57,7 +57,7 @@ const PopularProductsCarousel = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mt-10">
       <h2 className="text-2xl font-bold mb-4 text-center">Popular Products</h2>
       {popularProducts.length > 0 ? (
         <Slider {...settings}>

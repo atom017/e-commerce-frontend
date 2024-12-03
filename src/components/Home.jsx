@@ -1,5 +1,3 @@
-// src/pages/Home.js
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
@@ -7,9 +5,10 @@ import PopularProductsCarousel from '../components/PopularProductsCarousel'; // 
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
 import { addToFavorites } from '../redux/favoritesSlice';
-import { FaSearch } from 'react-icons/fa'; 
-import { ToastContainer,toast } from 'react-toastify'; // Import toast from react-toastify
-import 'react-toastify/dist/ReactToastify.css'; 
+import { FaSearch } from 'react-icons/fa';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';  // Importing arrow icons for pagination
+import { ToastContainer, toast } from 'react-toastify'; // Import toast from react-toastify
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -17,16 +16,24 @@ const Home = () => {
   const [quantity, setQuantity] = useState(1);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const baseURI = import.meta.env.VITE_API_BASE_URI;
 
-  // Fetch products and categories from the backend
+ 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`${baseURI}/products`);
-        setProducts(response.data);
+        const response = await axios.get(`${baseURI}/products`, {
+          params: {
+            page: currentPage,
+            limit: 8, // Number of products per page
+          },
+        });
+        setProducts(response.data.products);
+        setTotalPages(response.data.totalPages); 
       } catch (error) {
         console.error('Error fetching products:', error);
       }
@@ -43,7 +50,7 @@ const Home = () => {
 
     fetchProducts();
     fetchCategories();
-  }, []);
+  }, [currentPage, baseURI]);
 
   // Handle Add to Cart
   const handleAddToCart = async (product) => {
@@ -52,11 +59,11 @@ const Home = () => {
       name: product.name,
       price: product.price,
       quantity: quantity,
-      image: product.image
+      image: product.image,
     };
     dispatch(addToCart(item));
     toast.success(`${product.name} has been added to your cart!`, {
-      position: "top-right",
+      position: 'top-right',
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -76,8 +83,15 @@ const Home = () => {
     (selectedCategory === 'all' || product.category.name === selectedCategory)
   );
 
+  // Pagination Functions
+  const goToPage = (page) => {
+    if (page > 0 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
   return (
-    <div>
+    <div >
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold text-center mb-8">Products</h1>
 
@@ -127,8 +141,31 @@ const Home = () => {
           )}
         </div>
 
+        {/* Pagination Controls */}
+        <div className="flex justify-center items-center mt-6">
+          <button
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="p-2 mx-2 text-gray-600 disabled:text-gray-400 cursor-pointer"
+          >
+            <FaArrowLeft size={20} /> {/* Left arrow for previous page */}
+          </button>
+
+          <span className="text-lg font-semibold text-gray-600">
+            Page {currentPage} of {totalPages}
+          </span>
+
+          <button
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="p-2 mx-2 text-gray-600 disabled:text-gray-400 cursor-pointer"
+          >
+            <FaArrowRight size={20} /> {/* Right arrow for next page */}
+          </button>
+        </div>
+
         {/* Popular Products Carousel */}
-        <PopularProductsCarousel />
+        <PopularProductsCarousel/>
         <ToastContainer />
       </div>
     </div>
