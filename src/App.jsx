@@ -11,6 +11,7 @@ import SuccessPage from './components/SuccessPage';
 import CancelPage from './components/CancelPage';
 import FavoritesPage from './components/FavoritesPage';
 import Footer from './components/Footer';
+import ProductListPage from './components/ProductListPage';
 
 function App() {
   return (
@@ -21,12 +22,13 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile/edit" element={<ProfileEdit />} /> 
+        <Route path="/profile/edit" element={<ProfileEdit />} />
         <Route path="/success" element={<SuccessPage />} />
         <Route path="/success" element={<CancelPage />} />
         <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/products" element={<ProductListPage />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
   );
 }
