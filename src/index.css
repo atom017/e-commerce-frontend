@@ -6,3 +6,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* Add space between each slide */
+.slick-track {
+    display: flex; /* Ensure the items are in a flex row */
+    gap: 10px; /* Adjust this to create the desired space between slides */
+  }
+  
+  /* Ensure the individual slide does not have unnecessary margin */
+  .slick-slide {
+    margin: 0; /* Remove any default margin */
+  }
+  

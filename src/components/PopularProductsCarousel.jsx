@@ -62,26 +62,26 @@ const PopularProductsCarousel = () => {
       {popularProducts.length > 0 ? (
         <Slider {...settings}>
           {popularProducts.map((product) => (
-            <div key={product._id} className="flex flex-col items-center bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-lg relative">
-            {/* Product "Popular" Tag */}
-            <div className="absolute top-4 left-4 bg-red-600 text-white text-xs font-semibold py-1 px-2 rounded-full">
-              Popular
-            </div>
-          
-            {/* Product Image Container */}
-            <div className="w-full h-28 sm:h-32 md:h-36 bg-gray-200 flex justify-center items-center overflow-hidden rounded-lg mb-4">
-              <img
-                src={product.image || '/default-product-image.jpg'} 
-                alt={product.name}
-                className="object-cover w-full h-full"
-              />
+            <div key={product._id} className="flex flex-col items-center bg-white p-2 sm:p-3 md:p-4 rounded-lg shadow-lg relative">
+              {/* Product "Popular" Tag */}
+              <div className="absolute top-4 left-4 bg-red-600 text-white text-xs font-semibold py-1 px-2 rounded-full">
+                Popular
+              </div>
+
+              {/* Product Image Container */}
+              <div className="w-full h-28 sm:h-32 md:h-36 bg-gray-200 flex justify-center items-center overflow-hidden rounded-lg mb-4">
+                <img
+                  src={product.image || '/default-product-image.jpg'}
+                  alt={product.name}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-center text-gray-800 mb-2">{product.name}</h3>
+
+              <p className="text-sm sm:text-lg md:text-xl font-semibold text-center text-gray-600">${product.price.toFixed(2)}</p>
             </div>
 
-            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-center text-gray-800 mb-2">{product.name}</h3>
-
-            <p className="text-sm sm:text-lg md:text-xl font-semibold text-center text-gray-600">${product.price.toFixed(2)}</p>
-          </div>
-          
           ))}
         </Slider>
       ) : (

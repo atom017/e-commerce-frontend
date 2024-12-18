@@ -79,16 +79,16 @@ const Cart = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
+      {/* <h2 className="text-2xl font-semibold mb-4">Your Cart</h2> */}
 
       {items.length === 0 ? (
         <div>
-            <img 
+          <img
             height={320}
-            src='https://images.pexels.com/photos/953862/pexels-photo-953862.jpeg?auto=compress&cs=tinysrgb&w=600'/>
-            <p>Your cart is empty</p>
+            src='https://images.pexels.com/photos/953862/pexels-photo-953862.jpeg?auto=compress&cs=tinysrgb&w=600' />
+          <p>Your cart is empty</p>
         </div>
-        
+
       ) : (
         <div>
           {items.map((item, index) => (

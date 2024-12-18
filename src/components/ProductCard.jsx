@@ -12,10 +12,10 @@ const ProductCard = ({ product, onAddToCart, onAddToFavorite }) => {
 
       <div className="p-4">
         {/* Product Name */}
-        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#800020]">{product.name}</h3>
+        <h3 className="text-sm sm:text-lg md:text-xl font-semibold text-gray-600">{product.name}</h3>
 
         {/* Product Description */}
-        <p className="text-sm sm:text-base md:text-lg text-gray-500 mt-2">{product.description}</p>
+        <p className="text-sm sm:text-base lg:text-lg text-gray-500 mt-2">{product.description}</p>
 
         {/* Product Price */}
         <p className="text-lg sm:text-xl md:text-2xl font-bold text-[#FFD700] mt-2">${product.price}</p>
@@ -27,7 +27,7 @@ const ProductCard = ({ product, onAddToCart, onAddToFavorite }) => {
             onClick={() => onAddToCart(product)}
             className="bg-[#800020] text-white hover:bg-[#B88A2A] hover:text-[#fff] flex items-center mb-2 sm:mb-0 px-4 py-2 rounded-md"
           >
-            <FaCartPlus className="mr-2" /> Add 
+            <FaCartPlus className="mr-2" /> Add
           </button>
 
           {/* Add to Favorite Button */}

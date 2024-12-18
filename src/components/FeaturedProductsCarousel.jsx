@@ -30,9 +30,7 @@ const FeaturedProductsCarousel = () => {
         slidesToShow: 4, // Show 4 items per slide on large screens
         slidesToScroll: 1,
         dots: true,
-        arrows: true,
-        nextArrow: <FaArrowRight size={24} className="text-white" />,
-        prevArrow: <FaArrowLeft size={24} className="text-white" />,
+
         responsive: [
             {
                 breakpoint: 1280, // For larger tablets
@@ -48,12 +46,19 @@ const FeaturedProductsCarousel = () => {
                     slidesToScroll: 1,
                 },
             },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                },
+            },
         ],
     };
 
     return (
-        <div className="container mx-auto py-8">
-            <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Featured Products</h2>
+        <div className="container mx-auto p-4  ">
+            <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Featured Products</h2>
 
             {/* Loading State */}
             {loading ? (
@@ -65,7 +70,7 @@ const FeaturedProductsCarousel = () => {
                     {featuredProducts.map((product) => (
                         <div
                             key={product._id}
-                            className="flex flex-col items-center bg-white shadow-lg rounded-lg overflow-hidden p-6 transition-transform transform hover:scale-105"
+                            className="flex flex-col items-center bg-white shadow-lg rounded-lg overflow-hidden p-2  transition-transform transform hover:scale-105 "
                         >
                             {/* Product "Featured" Tag */}
                             <div className="absolute top-4 left-4 bg-[#D4AF37] text-white text-xs font-semibold py-1 px-3 rounded-full">
@@ -73,7 +78,7 @@ const FeaturedProductsCarousel = () => {
                             </div>
 
                             {/* Product Image Container */}
-                            <div className="w-full h-32 sm:h-40 md:h-48 lg:h-56 xl:h-64 bg-gray-200 flex justify-center items-center overflow-hidden rounded-lg mb-4">
+                            <div className="w-full h-28 sm:h-32 md:h-36 bg-gray-200 flex justify-center items-center overflow-hidden rounded-lg mb-4">
                                 <img
                                     src={product.image || '/default-product-image.jpg'}
                                     alt={product.name}
@@ -82,10 +87,10 @@ const FeaturedProductsCarousel = () => {
                             </div>
 
                             {/* Product Name */}
-                            <h3 className="text-lg font-medium text-gray-700 mb-2 text-center">{product.name}</h3>
+                            <h3 className="text-sm sm:text-base md:text-lg font-medium text-gray-700 mb-2 text-center">{product.name}</h3>
 
                             {/* Product Price */}
-                            <p className="text-lg font-semibold text-[#D4AF37] text-center">${product.price.toFixed(2)}</p>
+                            <p className="text-sm md:text-lg font-semibold text-[#D4AF37] text-center">${product.price.toFixed(2)}</p>
                         </div>
                     ))}
                 </Slider>

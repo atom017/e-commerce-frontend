@@ -52,7 +52,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-[#800020] p-4 shadow-lg fixed top-0 left-0 w-full z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="w-full mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="text-white text-2xl font-bold">
           TopShop

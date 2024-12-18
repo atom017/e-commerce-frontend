@@ -12,7 +12,7 @@ const Hero = () => {
                 <h1 className="text-4xl font-bold">Welcome to TopShop</h1>
                 <p className="mt-4 text-lg">Discover amazing products and exclusive deals.</p>
                 {/* Button to View All Products */}
-                <Link to="/products" className="mt-6 px-6 py-3 bg-[#E1B44C] text-white rounded-lg text-lg hover:bg-[#E6C67A] transition duration-300">
+                <Link to="/products" className="mt-6 px-6 py-3 bg-[#800020] text-white rounded-lg text-lg hover:bg-[#9B2A37] transition duration-300">
                     Shop Now
                 </Link>
             </div>

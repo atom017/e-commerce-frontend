@@ -105,8 +105,8 @@ const ProductListPage = () => {
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold text-center mb-8">Products</h1>
+        <div className="container mx-auto w-full  p-3 ">
+            {/* <h1 className="text-3xl font-bold text-center mb-8 w-full h-[200] bg-green-500">Products</h1> */}
 
             {/* Search and Category Filters */}
             <div className="flex flex-col sm:flex-row justify-between mb-6 gap-4">
@@ -144,7 +144,7 @@ const ProductListPage = () => {
             ) : (
                 <>
                     {/* Product List */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {filteredProducts.length > 0 ? (
                             filteredProducts.map((product) => (
                                 <ProductCard
