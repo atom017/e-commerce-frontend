@@ -1,0 +1,42 @@
+1. Modern & Minimalist Theme
+For a sleek, clean, and professional look, a minimalist design would work well. This is perfect if you want your products to stand out without distractions.
+
+Primary Color: Dark Charcoal (#333333) or Navy Blue (#1A2A3A)
+Accent Color: Bright Coral (#FF6F61) or Vibrant Teal (#1D9B8D)
+Background Color: White (#FFFFFF) or Light Grey (#F7F7F7)
+CTA Buttons: Bold Yellow (#FFB700) or Electric Blue (#007BFF)
+2. Luxury & Premium Theme
+If your website offers high-end products, a rich, elegant color scheme can create a sense of exclusivity and sophistication.
+
+Primary Color: Deep Burgundy (#800020) or Royal Purple (#6A0DAD)
+Accent Color: Gold (#D4AF37) or Platinum Grey (#A9A9A9)
+Background Color: Soft Cream (#FFF5E1) or Off-White (#F4F4F4)
+CTA Buttons: Rich Gold (#FFD700) or Deep Plum (#9B1C3B)
+3. Vibrant & Energetic Theme
+If you're catering to a younger, fashion-forward audience, a bold, energetic theme with bright colors will work well.
+
+Primary Color: Bright Turquoise (#1ABC9C) or Electric Pink (#E91E63)
+Accent Color: Yellow (#FFEB3B) or Bold Orange (#FF5722)
+Background Color: White (#FFFFFF) or Light Grey (#F1F1F1)
+CTA Buttons: Neon Green (#76FF03) or Bold Red (#FF1744)
+4. Nature-Inspired & Eco-Friendly Theme
+If your products have an eco-conscious or organic focus, this color scheme can evoke a sense of sustainability and nature.
+
+Primary Color: Forest Green (#2E8B57) or Olive Green (#708238)
+Accent Color: Earthy Brown (#8B4513) or Soft Tan (#D2B48C)
+Background Color: Soft Cream (#F4F4F4) or Light Sage (#D6E8D1)
+CTA Buttons: Leafy Green (#3D9E57) or Burnt Orange (#FF6A13)
+5. Classic & Trustworthy Theme
+For a more traditional or formal approach, this theme is perfect for a website where you want to evoke trust and reliability.
+
+Primary Color: Navy Blue (#003366) or Deep Blue (#004080)
+Accent Color: Light Grey (#D3D3D3) or Soft Gold (#FFD700)
+Background Color: White (#FFFFFF) or Pale Blue (#E9F0F6)
+CTA Buttons: Rich Burgundy (#8B0000) or Soft Yellow (#FFEB3B)
+6. Playful & Fun Theme
+If your website is aimed at a younger audience or offers playful products (like toys or novelties), go for bright and playful colors.
+
+Primary Color: Sky Blue (#00BFFF) or Bright Yellow (#FFEB3B)
+Accent Color: Hot Pink (#FF1493) or Orange (#FF5722)
+Background Color: Light Pastel Pink (#F8E0E6) or Pale Yellow (#FFF9C4)
+CTA Buttons: Bright Coral (#FF6F61) or Neon Green (#00FF00)

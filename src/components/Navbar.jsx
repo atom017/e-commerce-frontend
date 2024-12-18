@@ -51,11 +51,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-600 p-4 shadow-lg fixed top-0 left-0 w-full z-50">
+    <nav className="bg-[#800020] p-4 shadow-lg fixed top-0 left-0 w-full z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="text-white text-2xl font-bold">
-          E-Shop
+          TopShop
         </Link>
 
         {/* Navigation Links (Desktop and Tablet) */}
@@ -116,7 +116,7 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu (for small screens) */}
-      <div className={`lg:hidden ${isMenuOpen ? 'block' : 'hidden'} bg-blue-600 p-4`}>
+      <div className={`lg:hidden ${isMenuOpen ? 'block' : 'hidden'} bg-[#800020] p-4`}>
         <Link
           to="/"
           className="block text-white hover:text-gray-200 py-2 flex items-center"

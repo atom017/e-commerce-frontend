@@ -18,11 +18,13 @@ const ProductListPage = () => {
     const [selectedCategory, setSelectedCategory] = useState('all');
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(true); // Loading state
     const dispatch = useDispatch();
     const baseURI = import.meta.env.VITE_API_BASE_URI;
 
     useEffect(() => {
         const fetchProducts = async () => {
+            setLoading(true); // Set loading to true when fetching starts
             try {
                 const response = await axios.get(`${baseURI}/products`, {
                     params: {
@@ -34,15 +36,20 @@ const ProductListPage = () => {
                 setTotalPages(response.data.totalPages);
             } catch (error) {
                 console.error('Error fetching products:', error);
+            } finally {
+                setLoading(false); // Set loading to false once data is fetched
             }
         };
 
         const fetchCategories = async () => {
+            setLoading(true); // Set loading to true when fetching starts
             try {
                 const response = await axios.get(`${baseURI}/categories`);
                 setCategories(response.data);
             } catch (error) {
                 console.error('Error fetching categories:', error);
+            } finally {
+                setLoading(false); // Set loading to false once data is fetched
             }
         };
 
@@ -62,7 +69,7 @@ const ProductListPage = () => {
         dispatch(addToCart(item));
         toast.success(`${product.name} has been added to your cart!`, {
             position: 'top-right',
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
             draggable: true,
@@ -72,6 +79,15 @@ const ProductListPage = () => {
 
     const handleAddToFavorites = (product) => {
         dispatch(addToFavorites(product));
+        toast.success(`${product.name} has been added to your favorites!`, {
+            position: 'top-right',
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+            pauseOnHover: true,
+            style: { background: '#E8DFD0' },
+        });
     };
 
     // Filter products by search term and category
@@ -120,46 +136,55 @@ const ProductListPage = () => {
                 </div>
             </div>
 
-            {/* Product List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {filteredProducts.length > 0 ? (
-                    filteredProducts.map((product) => (
-                        <ProductCard
-                            key={product._id}
-                            product={product}
-                            onAddToCart={handleAddToCart}
-                            onAddToFavorite={handleAddToFavorites}
-                            setQuantity={setQuantity}
-                            quantity={quantity}
-                        />
-                    ))
-                ) : (
-                    <p className="text-center text-gray-600">No products found.</p>
-                )}
-            </div>
+            {/* Loading Indicator */}
+            {loading ? (
+                <div className="flex justify-center items-center space-x-2">
+                    <div className="loader">Loading...</div> {/* You can use a spinner or custom loader here */}
+                </div>
+            ) : (
+                <>
+                    {/* Product List */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        {filteredProducts.length > 0 ? (
+                            filteredProducts.map((product) => (
+                                <ProductCard
+                                    key={product._id}
+                                    product={product}
+                                    onAddToCart={handleAddToCart}
+                                    onAddToFavorite={handleAddToFavorites}
+                                    setQuantity={setQuantity}
+                                    quantity={quantity}
+                                />
+                            ))
+                        ) : (
+                            <p className="text-center text-gray-600">No products found.</p>
+                        )}
+                    </div>
 
-            {/* Pagination Controls */}
-            <div className="flex justify-center items-center mt-6">
-                <button
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className="p-2 mx-2 text-gray-600 disabled:text-gray-400 cursor-pointer"
-                >
-                    <FaArrowLeft size={20} />
-                </button>
+                    {/* Pagination Controls */}
+                    <div className="flex justify-center items-center mt-6">
+                        <button
+                            onClick={() => goToPage(currentPage - 1)}
+                            disabled={currentPage === 1}
+                            className="p-2 mx-2 text-gray-600 disabled:text-gray-400 cursor-pointer"
+                        >
+                            <FaArrowLeft size={20} />
+                        </button>
 
-                <span className="text-lg font-semibold text-gray-600">
-                    Page {currentPage} of {totalPages}
-                </span>
+                        <span className="text-lg font-semibold text-gray-600">
+                            Page {currentPage} of {totalPages}
+                        </span>
 
-                <button
-                    onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                    className="p-2 mx-2 text-gray-600 disabled:text-gray-400 cursor-pointer"
-                >
-                    <FaArrowRight size={20} />
-                </button>
-            </div>
+                        <button
+                            onClick={() => goToPage(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                            className="p-2 mx-2 text-gray-600 disabled:text-gray-400 cursor-pointer"
+                        >
+                            <FaArrowRight size={20} />
+                        </button>
+                    </div>
+                </>
+            )}
 
             <ToastContainer />
         </div>

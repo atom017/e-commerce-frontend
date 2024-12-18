@@ -4,7 +4,7 @@ import { removeFromCart, updateQuantity, clearCart } from '../redux/cartSlice';
 import { loadStripe } from '@stripe/stripe-js';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Import axios
-import { FaTrashAlt, FaPlus, FaMinus } from 'react-icons/fa'; // Importing react-icons for better UI
+import { FaTrashAlt, FaPlus, FaMinus, FaShoppingBasket } from 'react-icons/fa'; // Importing react-icons for better UI
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
@@ -82,7 +82,13 @@ const Cart = () => {
       <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
 
       {items.length === 0 ? (
-        <p>Your cart is empty</p>
+        <div>
+            <img 
+            height={320}
+            src='https://images.pexels.com/photos/953862/pexels-photo-953862.jpeg?auto=compress&cs=tinysrgb&w=600'/>
+            <p>Your cart is empty</p>
+        </div>
+        
       ) : (
         <div>
           {items.map((item, index) => (
@@ -132,7 +138,7 @@ const Cart = () => {
             </button>
             <button
               onClick={handleCheckout}
-              className="px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+              className="px-6 py-2 bg-[#FFD700] text-white rounded-lg hover:bg-[#CC9B00]"
             >
               Checkout
             </button>

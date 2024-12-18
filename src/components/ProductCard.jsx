@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaCartPlus, FaHeart } from 'react-icons/fa'; 
+import { FaCartPlus, FaHeart } from 'react-icons/fa';
 
 const ProductCard = ({ product, onAddToCart, onAddToFavorite }) => {
   return (
@@ -11,19 +11,29 @@ const ProductCard = ({ product, onAddToCart, onAddToFavorite }) => {
       />
 
       <div className="p-4">
-        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800">{product.name}</h3>
-        <p className="text-sm sm:text-base text-gray-600 mt-2">{product.description}</p>
-        <p className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 mt-2">${product.price}</p>
+        {/* Product Name */}
+        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#800020]">{product.name}</h3>
+
+        {/* Product Description */}
+        <p className="text-sm sm:text-base md:text-lg text-gray-500 mt-2">{product.description}</p>
+
+        {/* Product Price */}
+        <p className="text-lg sm:text-xl md:text-2xl font-bold text-[#FFD700] mt-2">${product.price}</p>
+
+        {/* Button Section */}
         <div className="flex flex-col sm:flex-row sm:space-x-4 mt-3">
+          {/* Add to Cart Button */}
           <button
             onClick={() => onAddToCart(product)}
-            className="text-blue-600 hover:text-blue-800 flex items-center mb-2 sm:mb-0"
+            className="bg-[#800020] text-white hover:bg-[#B88A2A] hover:text-[#fff] flex items-center mb-2 sm:mb-0 px-4 py-2 rounded-md"
           >
-            <FaCartPlus className="mr-2" /> Add to Cart
+            <FaCartPlus className="mr-2" /> Add 
           </button>
+
+          {/* Add to Favorite Button */}
           <button
             onClick={() => onAddToFavorite(product)}
-            className="text-red-600 hover:text-red-800 flex items-center"
+            className="text-[#800020] hover:text-[#B88A2A] flex items-center px-4 py-2 rounded-md"
           >
             <FaHeart className="mr-2" /> Like
           </button>

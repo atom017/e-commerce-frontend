@@ -58,7 +58,7 @@ const FeaturedProductsCarousel = () => {
             {/* Loading State */}
             {loading ? (
                 <div className="flex justify-center items-center">
-                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-teal-500 border-solid"></div>
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-gray-500 border-solid"></div>
                 </div>
             ) : (
                 <Slider {...settings}>
@@ -68,7 +68,7 @@ const FeaturedProductsCarousel = () => {
                             className="flex flex-col items-center bg-white shadow-lg rounded-lg overflow-hidden p-6 transition-transform transform hover:scale-105"
                         >
                             {/* Product "Featured" Tag */}
-                            <div className="absolute top-4 left-4 bg-teal-500 text-white text-xs font-semibold py-1 px-3 rounded-full">
+                            <div className="absolute top-4 left-4 bg-[#D4AF37] text-white text-xs font-semibold py-1 px-3 rounded-full">
                                 Featured
                             </div>
 
@@ -85,7 +85,7 @@ const FeaturedProductsCarousel = () => {
                             <h3 className="text-lg font-medium text-gray-700 mb-2 text-center">{product.name}</h3>
 
                             {/* Product Price */}
-                            <p className="text-lg font-semibold text-teal-600 text-center">${product.price.toFixed(2)}</p>
+                            <p className="text-lg font-semibold text-[#D4AF37] text-center">${product.price.toFixed(2)}</p>
                         </div>
                     ))}
                 </Slider>
