@@ -1,4 +1,3 @@
-// src/pages/ProductListPage.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';
@@ -105,10 +104,7 @@ const ProductListPage = () => {
     };
 
     return (
-        <div className="container mx-auto w-2/3 sm:w-full  p-3 ">
-            {/* <h1 className="text-3xl font-bold text-center mb-8 w-full h-[200] bg-green-500">Products</h1> */}
-
-            {/* Search and Category Filters */}
+        <div className="container mx-auto w-3/4 sm:w-full p-3">
             <div className="flex flex-col sm:flex-row justify-between mb-6 gap-4">
                 <div className="w-full sm:w-1/2 relative">
                     <input
@@ -139,7 +135,7 @@ const ProductListPage = () => {
             {/* Loading Indicator */}
             {loading ? (
                 <div className="flex justify-center items-center space-x-2">
-                    <div className="loader">Loading...</div> {/* You can use a spinner or custom loader here */}
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
                 </div>
             ) : (
                 <>
