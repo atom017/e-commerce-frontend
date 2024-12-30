@@ -4,6 +4,8 @@ import Slider from 'react-slick'; // Slick carousel component
 import { useDispatch } from 'react-redux'; // Import useDispatch from react-redux
 import { addToCart } from '../redux/cartSlice'; // Import the addToCart action
 import { FaTimes, FaShoppingCart } from 'react-icons/fa'; // Import icons from react-icons
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PopularProductsCarousel = () => {
   const [popularProducts, setPopularProducts] = useState([]);
@@ -24,7 +26,7 @@ const PopularProductsCarousel = () => {
       } catch (error) {
         console.error('Error fetching popular products:', error);
       } finally {
-        setLoading(false); // Set loading to false after the request is finished
+        setLoading(false);
       }
     };
 
@@ -35,8 +37,8 @@ const PopularProductsCarousel = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    autoplay: true,  // Enable autoplay
-    autoplaySpeed: 3000, // Set the autoplay speed (3 seconds)
+    autoplay: true,
+    autoplaySpeed: 3000,
     slidesToShow: 4,
     slidesToScroll: 1,
     responsive: [
@@ -65,7 +67,7 @@ const PopularProductsCarousel = () => {
   };
 
   const handleProductClick = (product) => {
-    setSelectedProduct(product); // Set the clicked product to selectedProduct
+    setSelectedProduct(product);
   };
 
   const handleAddToCart = (product) => {
@@ -77,6 +79,14 @@ const PopularProductsCarousel = () => {
       quantity: 1,
       image,
     }));
+    toast.success(`${product.name} has been added to your cart!`, {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      pauseOnHover: true,
+    });
   };
 
   return (
@@ -98,7 +108,7 @@ const PopularProductsCarousel = () => {
               onClick={() => handleProductClick(product)} // Add click handler
             >
               {/* Product "Popular" Tag */}
-              <div className="absolute top-4 left-4 bg-red-600 text-white text-xs font-semibold py-1 px-2 rounded-full">
+              <div className="absolute top-4 left-4 bg-[#FFD700] text-white text-xs font-semibold py-1 px-2 rounded-full">
                 Popular
               </div>
 
@@ -125,7 +135,7 @@ const PopularProductsCarousel = () => {
         selectedProduct && (
           <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50 m-auto">
             <div className="bg-white p-6 sm:p-8 md:p-10 rounded-lg shadow-lg w-80 sm:w-96 md:w-1/2 lg:w-1/3 max-h-[90vh] overflow-auto relative">
-              {/* Close Button with React Icon */}
+
               <button
                 className="absolute top-4 right-4 text-gray-700 font-bold"
                 onClick={() => setSelectedProduct(null)} // Close the details modal
@@ -135,8 +145,8 @@ const PopularProductsCarousel = () => {
 
               <h3 className="text-xl sm:text-2xl font-semibold mb-4">{selectedProduct.name}</h3>
 
-              {/* Image Container */}
-              <div className="w-full h-32 sm:h-48 md:h-56 bg-gray-200 flex justify-center items-center overflow-hidden rounded-lg mb-4">
+
+              <div className="w-full h-28 sm:h-32 md:h-36 bg-gray-200 flex justify-center items-center overflow-hidden rounded-lg mb-4">
                 <img
                   src={selectedProduct.image || '/default-product-image.jpg'}
                   alt={selectedProduct.name}
@@ -144,16 +154,13 @@ const PopularProductsCarousel = () => {
                 />
               </div>
 
-              {/* Product Price */}
               <p className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">${selectedProduct.price.toFixed(2)}</p>
-
-              {/* Product Description */}
               <p className="text-sm sm:text-base text-gray-600 mb-4">{selectedProduct.description}</p>
 
-              {/* Add to Cart Button with React Icon */}
+
               <button
                 onClick={() => handleAddToCart(selectedProduct)}
-                className="bg-[#800020] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg w-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
+                className="bg-[#800020] text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg w-full hover:bg-[#9B2A37] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center"
               >
                 <FaShoppingCart className="mr-2" />
                 Add to Cart
@@ -162,7 +169,7 @@ const PopularProductsCarousel = () => {
           </div>
         )
       }
-
+      <ToastContainer />
     </div>
   );
 };
